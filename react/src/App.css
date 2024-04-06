@@ -40,3 +40,37 @@
 .read-the-docs {
   color: #888;
 }
+/* #grid-toogle { */
+/* position: relative; */
+/* } */
+#grid-container {
+  /* position: relative; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 50px;
+  display: none;
+  height: 60vh;
+  width: 60vh;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 30% 30% 30%;
+  /* grid-auto-flow: dense; */
+  gap: 5%;
+}
+#grid-container div {
+  cursor: pointer;
+  border: 1px solid gray;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#grid-container div i {
+  font-size: 10rem;
+}
+#card-winner {
+  /* position: relative; */
+  display: none;
+}
