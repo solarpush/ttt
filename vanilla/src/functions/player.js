@@ -1,4 +1,4 @@
-import { resetDisplayGrid } from "./grid";
+import { resetAndInitDisplayGrid } from "./grid";
 import { displayWinner } from "./winner";
 
 class Game {
@@ -18,9 +18,14 @@ class Game {
     this.playerTwo = [];
     this.winner = null;
   }
-  startGame() {
-    const btn = document.querySelector("#grid-toogle");
-    btn.style.display = "none";
+  startGame(button, grid) {
+    //reset partie cache le boutton et affiche la grille
+    button.style.display = "none";
+    grid.style.display = "grid";
+    this.playerOne = [];
+    this.playerTwo = [];
+    this.winner = null;
+    this.gameStep = 0;
   }
   endGame() {
     if (!this.winner) {
@@ -29,17 +34,18 @@ class Game {
     const btn = document.querySelector("#grid-toogle");
     const grid = document.querySelector("#grid-container");
 
-    resetDisplayGrid(btn, grid);
+    resetAndInitDisplayGrid(btn, grid);
     displayWinner(this.winner);
   }
 }
 
 export class Players extends Game {
   constructor() {
+    // appel au contructeur de la class dont Players extend
     super();
   }
-
   #gameController(element) {
+    // controle si la partie peut continuer
     if (this.winner) {
       return;
     }
@@ -57,10 +63,13 @@ export class Players extends Game {
     if (!this.#gameController(element)) {
       return;
     }
-
     const i = document.createElement("i");
     const gridPosition = element.id?.split("-")[2];
     let currPlayer;
+    // pour chaques coup
+    // ajout du coup joué au joueur correspondant
+    // assignation du joueur current
+    // ajout d'une croix ou d'un rond dans l'élément en parametre de la fonction
     if (this.gameStep % 2) {
       this.playerTwo.push(parseInt(gridPosition));
       currPlayer = this.playerTwo;
@@ -74,18 +83,16 @@ export class Players extends Game {
     this.gameStep = ++this.gameStep;
     element.appendChild(i);
 
-    console.log("played", currPlayer);
-    let result = null;
+    // controle si le tableau de coup correspond
     for (let sIndex = 0; sIndex < this.solutions.length; sIndex++) {
+      let result = null;
       let score = 0;
 
       for (let pIndex = 0; pIndex < currPlayer.length; pIndex++) {
         const element = currPlayer[pIndex];
-        if (!this.solutions[sIndex].includes(element)) {
-          continue;
-        } else {
-          result = this.solutions[sIndex];
+        if (this.solutions[sIndex].includes(element)) {
           score++;
+          result = this.solutions[sIndex];
         }
       }
       if (score >= 3) {

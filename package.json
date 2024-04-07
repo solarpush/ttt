@@ -1,0 +1,10 @@
+{
+  "name": "titactoe",
+  "version": "1.0.0",
+  "description": "Tic Tac Toe from scratch",
+  "scripts": {
+    "install": "cd vanilla && npm install && cd ../react && npm install"
+  },
+  "author": "",
+  "license": "ISC"
+}

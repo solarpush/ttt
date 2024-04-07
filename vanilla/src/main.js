@@ -1,9 +1,10 @@
 import "primeicons/primeicons.css";
-import { resetDisplayGrid, setupGrid } from "./functions/grid.js";
+import { resetAndInitDisplayGrid } from "./functions/grid.js";
 import "./style.css";
 
-setupGrid(document.querySelector("#grid-container"));
-resetDisplayGrid(
+// initialise les éléments de la grille avec leur logique interne
+
+resetAndInitDisplayGrid(
   document.querySelector("#grid-toogle"),
   document.querySelector("#grid-container")
 );
