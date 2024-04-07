@@ -1,7 +1,6 @@
 # Tic Tac Toe
 
 Pour ce cours sur React js nous allons creer un petit jeu from scratch.
-![fork](./assets/video.mp4)
 
 ## Les objectifs du cours
 
