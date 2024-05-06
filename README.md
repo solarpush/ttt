@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-Pour ce cours sur React js nous allons creer un petit jeu from scratch.
+Pour ce cours sur React js nous allons creer un petit jeu from scratch. c'est ok !
 
 ## Les objectifs du cours
 
