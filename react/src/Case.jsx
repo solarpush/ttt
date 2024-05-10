@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const Case = ({ index, caseIsClicked, gameStep }) => {
+export const Case = ({ index, caseIsClicked, winner }) => {
     const [clicked, setClicked] = useState(false);
     const [className, setClassName] = useState("");
+    const [bgRed, setBgRed] = useState(false);
+
+    useEffect(() => {
+        if (winner) {
+            const isWinCase = winner.result.some((v) => v === index);
+            if (isWinCase) {
+                setBgRed(true);
+            }
+        }
+    }, [winner]);
 
     function updateGameAndMove() {
         setClicked(true);
@@ -13,7 +23,11 @@ export const Case = ({ index, caseIsClicked, gameStep }) => {
     }
 
     return (
-        <div onClick={updateGameAndMove} id={`grid-element-${index}`}>
+        <div
+            onClick={updateGameAndMove}
+            id={`grid-element-${index}`}
+            style={{ backgroundColor: bgRed ? "red" : "gray" }}
+        >
             {clicked === true && <i className={className}></i>}
         </div>
     );
