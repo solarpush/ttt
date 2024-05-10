@@ -82,6 +82,7 @@ export class Players extends Game {
 
     this.gameStep = ++this.gameStep;
     element.appendChild(i);
+    console.log(this.gameStep);
 
     // controle si le tableau de coup correspond
     for (let sIndex = 0; sIndex < this.solutions.length; sIndex++) {
@@ -95,6 +96,7 @@ export class Players extends Game {
           result = this.solutions[sIndex];
         }
       }
+
       if (score >= 3) {
         const winner = {
           name: this.playerOne === currPlayer ? "joueur 1" : "joueur 2",
@@ -104,6 +106,14 @@ export class Players extends Game {
         this.endGame();
         break;
       }
+    }
+    if (this.gameStep >= 9) {
+      const winner = {
+        name: "Egalitée",
+        result: null,
+      };
+      this.winner = winner;
+      this.endGame();
     }
   }
 }
