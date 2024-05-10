@@ -1,28 +1,39 @@
 import { useState } from "react";
+import { Grid } from "./Grid";
+
+let arrayOfCasePlayed = [];
 
 export const Game = () => {
-const [visible, setVisible] = useState(false);
-function gridDisplayGameInit() {
-    setVisible(true)
-};
+    const [visible, setVisible] = useState(false);
+    const [gameStep, setGameStep] = useState(0);
+    function gridDisplayAndGameInit() {
+        setVisible(true);
+    }
 
-const Grid = () => { return <div id="grid-container">
-    <div id="grid-element-0"></div>
-    <div id="grid-element-1"></div>
-    <div id="grid-element-2"></div>
-    <div id="grid-element-3"></div>
-    <div id="grid-element-4"></div>
-    <div id="grid-element-5"></div>
-    <div id="grid-element-6"></div>
-    <div id="grid-element-7"></div>
-    <div id="grid-element-8"></div>
-    </div>; }
+    function caseIsClicked(indexOfCase) {
+        const indexExistInArray = arrayOfCasePlayed.filter(
+            (f) => f === indexOfCase
+        );
+        console.log(indexExistInArray);
+        if (indexExistInArray.length > 0) {
+            return;
+        }
+   
+        arrayOfCasePlayed.push(indexOfCase);
+        setGameStep((prev) => ++prev);
+        const className = gameStep % 2 ? "pi pi-circle-off" : "pi pi-times";
+        return className;
+    }
 
-    return <div>
-        <button id="grid-toogle" onClick={() => gridDisplayGameInit()}>
-            Start Game
-        </button>
-        {visible && < Grid/> }
-        
-    </div>
+    return (
+        <div>
+            {visible === true ? (
+                <Grid caseIsClicked={caseIsClicked} gameStep={gameStep} />
+            ) : (
+                <button id="grid-toogle" onClick={() => gridDisplayAndGameInit()}>
+                    Start game
+                </button>
+            )}
+        </div>
+    );
 };
