@@ -50,8 +50,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 50px;
-  display: none;
   height: 60vh;
+  display: grid;
   width: 60vh;
   grid-template-columns: 30% 30% 30%;
   grid-template-rows: 30% 30% 30%;
