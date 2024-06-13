@@ -50,7 +50,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 50px;
-  display: none;
+  display: grid;
   height: 60vh;
   width: 60vh;
   grid-template-columns: 30% 30% 30%;
@@ -60,7 +60,6 @@
 }
 #grid-container div {
   cursor: pointer;
-  border: 1px solid gray;
   height: 100%;
   width: 100%;
   display: flex;
