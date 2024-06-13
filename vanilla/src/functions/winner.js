@@ -7,7 +7,7 @@ export function displayWinner(winner) {
   } </h3>`;
   if (winner.result) {
     const solution = winner.result;
-    // pour caques grilles de la solution trouvé bg rouge
+    // pour chaques grilles de la solution trouvé bg rouge
     solution.forEach((element) => {
       const winElement = document.querySelector("#grid-element-" + element);
       winElement.style.backgroundColor = "red";
