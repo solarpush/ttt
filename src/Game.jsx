@@ -26,7 +26,7 @@ export const Game = () => {
   const [visible, setVisible] = useState(false);
   const [gameStep, setGameStep] = useState(0);
   const [winner, setWinner] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(180); // 3 minutes = 180 secondes
+  const [timeLeft, setTimeLeft] = useState(60); // 1 minute = 60 secondes
 
   // Fonction pour initialiser le jeu et afficher la grille
   function gridDisplayAndGameInit() {
