@@ -1,5 +1,7 @@
 # Tic Tac Toe
 
+## par Valérian CARADEC
+
 Pour ce cours sur React js nous allons creer un petit jeu from scratch.
 
 ## Les objectifs du cours
