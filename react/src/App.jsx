@@ -1,37 +1,59 @@
-import "primeicons/primeicons.css";
-import { useRef, useState } from "react";
-import "./App.css";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import React, { useState } from 'react';
+import Grid from './assets/Grid';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0);
-  const myRef = useRef(null);
-  console.log(myRef?.current?.id);
+const App = () => {
+  const [pions, setPions] = useState(Array(9).fill(null));
+  const [isXNext, setIsXNext] = useState(true);
+
+  const handleSquareClick = (index) => {
+    if (pions[index] || calculateWinner(pions)) {
+      return;
+    }
+
+    const newPions = pions.slice();
+    newPions[index] = isXNext ? 'X' : 'O';
+    setPions(newPions);
+    setIsXNext(!isXNext);
+  };
+
+  const handleReset = () => {
+    setPions(Array(9).fill(null));
+    setIsXNext(true);
+  };
+
+  const winner = calculateWinner(pions);
+  const status = winner ? `Gagnant: ${winner}` : `Joueur suivant : ${isXNext ? 'X' : 'O'}`;
+
   return (
-    <>
-      <div ref={myRef} id="monId">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      <h1>Tic Tac Toe</h1>
+      <div className="status">{status}</div>
+      <Grid pions={pions} onSquareClick={handleSquareClick} />
+      <button className="reset-button" onClick={handleReset}>Réinitialiser</button>
+    </div>
   );
-}
+};
+
+const calculateWinner = (pions) => {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (pions[a] && pions[a] === pions[b] && pions[a] === pions[c]) {
+      return pions[a];
+    }
+  }
+  return null;
+};
 
 export default App;
